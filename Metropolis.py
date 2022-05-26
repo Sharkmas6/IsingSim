@@ -11,8 +11,8 @@ pUpInnit = 0
 KIter = 4
 
 # Sytem settings
-mu = 2
-H = 10
+mu = 1
+H = 2
 J = 1
 kTc = 2 * J * NDims
 kT = 1
@@ -80,12 +80,12 @@ class Lattice:
             if accept:
                 self.FlipSpin(loc)
 
-            if i> 2000:
+            """ if i> 2000:
                 locy, locx = loc
                 print((locy, locx), self.lattice[locy-1: locy+2, locx-1: locx+2], sep="\n")
                 print(f"dE: {dE}\nProb: {ans}\nAccept: {accept}")
                 self.ShowLattice()
-                a=2
+                a=2 """
 
             # store results for each iteration
             if Evo != 0:
@@ -112,7 +112,7 @@ class Lattice:
         '''
         loc = tuple(loc)
 
-        E = - self.B * np.sum(self.lattice) if deep else 0  # was sum
+        E = - self.B * self.lattice[loc] if deep else 0  # was sum
         # direct neighbours only (no diagonals)
         for n in range(self.NDims):
             for j in range(-1, 2, 2):
@@ -179,11 +179,11 @@ print("Counts: ", lat.GetCounts())
 fig, (ax0, ax1) = plt.subplots(2, 1, sharex=True)
 
 ax0.plot(Iter, np.array(EIter) / (J * NDims))
-ax0.set_ylabel("Average Energy (E / (J*NDim))")
+ax0.set_ylabel(r"Average Energy ($\frac{E}{JN_{Dim}}$)")
 
 ax1.plot(Iter, mIter)
-ax1.set_ylabel("Average Magnetisation (m)")
-ax1.set_xlabel("Iteration no.")
+ax1.set_ylabel(r"Average Magnetisation ($m$)")
+ax1.set_xlabel(r"Iteration no.")
 
 
 def animate(i):

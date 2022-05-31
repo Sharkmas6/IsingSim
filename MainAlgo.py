@@ -24,10 +24,11 @@ class Lattice:
         '''
         Execute single iteration of main Metropolis algorithm
         '''
-        Loc = np.random.random(self.NDims) if Loc is None else Loc
+        Loc = np.random.random_integers(low=0, high=self.NSpins-1 ,size=self.NDims) if Loc is None else Loc
         Acc = np.random.random() if Acc is None else Acc
 
         # energy difference
+        print(f"loc: {Loc} --- acc: {Acc}")
         dE = - 2 * self.GetEnergy(Loc, deep=True)
 
         # acceptance probability

@@ -5,12 +5,12 @@ from MainAlgo import *
 rng = 0
 NDims = 2
 NSpins = 20
-pUpInnit = 1
+pUpInnit = 0.5
 KIter = 4
 
 # Sytem settings
 mu = 1
-H = -2
+H = 0
 J = 1
 kTc = 2 * J * NDims
 kT = 1

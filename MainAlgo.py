@@ -19,6 +19,8 @@ class Lattice:
         # prepare energies, magnetisation arrays
         if Evo:
             self.EIter, self.mIter = [], []
+        else:
+            self.EIter, self.mIter = None, None
 
     def RunIter(self, Loc=None, Acc=None):
         '''
@@ -28,7 +30,6 @@ class Lattice:
         Acc = np.random.random() if Acc is None else Acc
 
         # energy difference
-        print(f"loc: {Loc} --- acc: {Acc}")
         dE = - 2 * self.GetEnergy(Loc, deep=True)
 
         # acceptance probability
